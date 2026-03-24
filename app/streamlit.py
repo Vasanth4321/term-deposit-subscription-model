@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import os
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -175,16 +176,17 @@ hr {
 # ── Load model ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    with open('../models/best_model.pkl', 'rb') as f:
+    base = os.path.dirname(__file__)
+    with open(os.path.join(base, '../models/best_model.pkl'), 'rb') as f:
         return pickle.load(f)
 
 try:
-    saved       = load_model()
-    model       = saved['model']
-    threshold   = saved['threshold']
+    saved        = load_model()
+    model        = saved['model']
+    threshold    = saved['threshold']
     preprocessor = saved['preprocessor']
-    cap_values  = saved['cap_values']
-    model_name  = saved.get('name', 'Gradient Boosting')
+    cap_values   = saved['cap_values']
+    model_name   = saved.get('name', 'Gradient Boosting')
 except FileNotFoundError:
     st.error("⚠️ `best_model.pkl` not found. Run the notebook save cell first.")
     st.stop()
