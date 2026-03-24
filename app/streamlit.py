@@ -175,7 +175,7 @@ hr {
 # ── Load model ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    with open('models/best_model.pkl', 'rb') as f:
+    with open('../models/best_model.pkl', 'rb') as f:
         return pickle.load(f)
 
 try:
