@@ -63,7 +63,7 @@ TermTrack/
 | `housing_loan` | Binary | Has housing loan? |
 | `personal_loan` | Binary | Has personal loan? |
 | `contact` | Categorical | Contact communication type |
-| `month` | Numerical | Last contact month |
+| `month` | Categorical | Last contact month |
 | `day` | Numerical | Last contact day of month |
 | `duration` | Numerical | Last contact duration (seconds) |
 | `total_calls` | Numerical | Number of contacts in this campaign |
