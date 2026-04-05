@@ -6,7 +6,7 @@ import streamlit as st
 from scipy.special import boxcox1p
 
 st.set_page_config(
-    page_title="Bank Term Deposit Predictor",
+    page_title="TermTrack - Bank Term Deposit Predictor",
     page_icon="📈",
     layout="wide"
 )
@@ -150,7 +150,7 @@ try:
     threshold = bundle["threshold"]
     metrics = bundle["metrics"]
 except FileNotFoundError:
-    st.error("`termdepositbestmodel.pkl` not found. Run the notebook save cell first.")
+    st.error("`term_deposit_best_model.pkl` not found. Run the notebook save cell first.")
     st.stop()
 except Exception as e:
     st.error(f"Model loading failed: {e}")
@@ -158,7 +158,7 @@ except Exception as e:
 
 st.markdown("""
 <div class="header-banner">
-    <h1>Bank Term Deposit Predictor</h1>
+    <h1>TermTrack</h1>
     <p>Predict whether a client will subscribe to a term deposit based on profile and campaign details.</p>
 </div>
 """, unsafe_allow_html=True)
@@ -172,7 +172,7 @@ with left:
     age = c1.number_input("Age", min_value=18, max_value=95, value=35)
     job = c2.selectbox(
         "Job",
-        ["admin.", "blue-collar", "entrepreneur", "housemaid", "management",
+        ["admin", "blue-collar", "entrepreneur", "housemaid", "management",
          "retired", "self-employed", "services", "student", "technician",
          "unemployed", "unknown"]
     )
@@ -199,7 +199,7 @@ with left:
     )
     day = c11.number_input("Day of Month", min_value=1, max_value=31, value=15)
 
-    duration = st.slider("Last Call Duration (seconds)", min_value=0, max_value=5000, value=200)
+    duration = st.slider("Last Call Duration (seconds)", min_value=0, max_value=1500, value=200)
 
     st.markdown('<div class="section-label">Campaign History</div>', unsafe_allow_html=True)
 
@@ -227,7 +227,7 @@ with right:
 
             raw_input = {
                 "age": age,
-                "job": "admin" if job == "admin." else str(job),
+                "job": "admin" if job == "admin" else str(job),
                 "marital": str(marital),
                 "education": str(education),
                 "has_credit": 1 if has_credit == "yes" else 0,
